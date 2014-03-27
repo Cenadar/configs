@@ -1,0 +1,1 @@
+/home/cenadar/arc.sh
