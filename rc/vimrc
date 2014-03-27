@@ -1,1 +1,8 @@
-/home/cenadar/.vimrc
+set number
+set autoindent
+set expandtab
+set tabstop=2
+
+set visualbell
+set wildmenu
+colorscheme default 

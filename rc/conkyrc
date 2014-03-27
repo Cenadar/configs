@@ -1,1 +1,52 @@
-/home/cenadar/.conkyrc
+background no
+use_xft yes
+xftfont Monospace:size=10
+
+update_interval 0.5
+
+border_margin 4
+border_width 1
+stippled_borders 8
+
+gap_x 30
+gap_y 40
+
+total_run_times 0
+
+# maximum_width 401
+
+own_window yes
+own_window_colour 808080
+own_window_argb_visual yes
+own_window_argb_value 200
+own_window_hints undecorated,below,skip_taskbar
+
+alignment top_right
+
+short_units yes
+
+show_graph_scale yes
+
+double_buffer yes
+
+default_color white
+default_shade_color black
+default_outline_color black
+
+TEXT
+${color #000000}$nodename   linux-$kernel${alignr}${time %l:%M:%S}
+${color #000000}System:
+${color #000000} Uptime:${color #303030} $uptime ${color #000000}- Load:${color #303030} $loadavg
+${color #000000} CPU1 Usage:${color #303030} ${cpu cpu1}%
+${color #000000} CPU2 Usage:${color #303030} ${cpu cpu2}%
+${color #000000}${cpugraph cpu1 50,300 000000 303030}
+${color #000000}${cpugraph cpu2 50,300 000000 303030}
+${color #000000} RAM Usage:${color #303030} $mem / $memmax - $memperc% ${membar}
+${color #000000}${memgraph 100,300 000000 303030}
+${color #000000} Swap Usage:${color #303030} $swap
+${color #000000} Processes:${color #303030} $processes  ${color #000000}Running:${color #303030} $running_processes
+
+${color #000000}Disk:
+${color #000000} /dev/sda: read: ${diskio_read /dev/sda} write: ${diskio_write /dev/sda}
+
+${color #000000} Download:${color #303030} ${downspeed wlan0}  ${color #000000} Upload:${color #303030} ${upspeed wlan0}
