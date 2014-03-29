@@ -18,44 +18,45 @@ dir="$backup_dir/$date_stamp"
 file="$dir/$time_stamp-home.tgz"
 logfile="$dir/$time_stamp.log"
 
-dayly_found=false
+daily_found=false
 weekly_found=false
 monthly_found=false
 
-for i in {0..30}
-do
-  if [ -d "$backup_dir/$(get_date $i)" ]; then
-    if [ $i -lt 1 ]; then
-      dayly_found=true
+if [ -z $1 ]; then
+  for i in {0..30}
+  do
+    if [ -d "$backup_dir/$(get_date $i)" ]; then
+      if [ $i -lt 1 ]; then
+        daily_found=true
+      fi
+      if [ $i -lt 7 ]; then
+        weekly_found=true
+      fi
+      if [ $i -lt 30 ]; then
+        monthly_found=true
+      fi
     fi
-    if [ $i -lt 7 ]; then
-      weekly_found=true
-    fi
-    if [ $i -lt 30 ]; then
-      monthly_found=true
-    fi
-  fi
-done
+  done
 
-if [ "$monthly_found" = false ]; then
-list="monthly-list"
-else
-  if [ "$weekly_found" = false ]; then
-    list="weekly-list"
+  if [ "$monthly_found" = false ]; then
+  list="monthly-list"
   else
-    if [ "$dayly_found" = false ]; then
-      list="dayly-list"
+    if [ "$weekly_found" = false ]; then
+      list="weekly-list"
     else
-      echo "$dayly_found"
-      exit
+      if [ "$daily_found" = false ]; then
+        list="daily-list"
+      else
+        zenity --info --title "Backup OK" --text "Backup is not needed"
+        exit
+      fi
     fi
   fi
+else
+  list="$1-list"
 fi
 
 backup_list="$backup_dir/$list.sh"
-
-echo "$backup_list"
-exit
 
 mkdir -p $dir
 rc=$?
