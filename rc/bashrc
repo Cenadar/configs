@@ -115,5 +115,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias pbcopy="xsel --clipboard --input"
-alias pbpaste="xsel --clipboard --output"
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+alias mysysupd='sudo aptitude update && sudo aptitude upgrade'
+
+export LC_TIME='en_US.UTF-8'
+umask 077
